@@ -25,7 +25,27 @@
         "command": "extension-tut.terminalCommand",
         "title": "Terminal Command(cat)"
       }
-    ]
+    ],
+    "languages": [
+      {
+          "id": "queens",
+          "aliases": [
+              "queens",
+              "queens"
+          ],
+          "extensions": [
+              ".queens"
+          ],
+          "configuration": "./queens_syntax_highliting/queens.configuration.json"
+      }
+  ],
+  "grammars": [
+      {
+          "language": "queens",
+          "scopeName": "source.queens",
+          "path": "./queens_syntax_highliting/queens.tmLanguage"
+      }
+  ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

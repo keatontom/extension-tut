@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>queens</string>
+	</array>
+	<key>name</key>
+	<string>queens</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>match</key>
+			<string>//.+</string>
+			<key>name</key>
+			<string>comment.line.source.queens</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>name</key>
+			<string>comment.block.source.queens</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\"</string>
+			<key>end</key>
+			<string>\"</string>
+			<key>name</key>
+			<string>string.quoted.source.queens</string>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\'</string>
+			<key>end</key>
+			<string>\'</string>
+			<key>name</key>
+			<string>string.quoted.source.queens</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.source.queens</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>('Haiyu', 'Keaton', 'Dingel')</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.queens</string>
+	<key>uuid</key>
+	<string>6d38bd0e-cb6f-4f02-870f-9384bad6762a</string>
+</dict>
+</plist>
