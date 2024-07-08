@@ -50,7 +50,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>('Haiyu', 'Keaton', 'Dingel')</string>
+			<string>(Haiyu)</string>
 		</dict>
 	</array>
 	<key>scopeName</key>
