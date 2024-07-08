@@ -22,8 +22,12 @@
         "title": "Ask Question"
       },
       {
-        "command": "extension-tut.terminalCommand",
-        "title": "Terminal Command(cat)"
+        "command": "extension-tut.touch",
+        "title": "Create File"
+      },
+      {
+        "command": "extension-tut.echo",
+        "title": "Write to File"
       }
     ]
   },
