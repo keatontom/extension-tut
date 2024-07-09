@@ -11,8 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// Register the Hello World command
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.helloWorld', () => {
-			// vscode.window.showInformationMessage('Hello World from extension-tut!');
-			webviewPanel.createOrShow(context.extensionUri);
+			vscode.window.showInformationMessage('Hello World from extension-tut!');
 		})
 	);
 
