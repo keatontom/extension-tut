@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// Register the Ask Question command
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.askQuestion', async () => {
-			const answer = await vscode.window.showInformationMessage('How is your day?', 'Good', 'Bad');
+			const answer = await vscode.window.showInformationMessage('How is your dayssss?', 'Good', 'Bad');
 			if (answer === 'Bad') {
 				vscode.window.showInformationMessage("Sorry to hear that");
 			} else {
@@ -81,7 +81,8 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 			);
 		}));
-
+	
+	//Webview
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.showWebview', () => {
 			webviewPanel.createOrShow(context.extensionUri);

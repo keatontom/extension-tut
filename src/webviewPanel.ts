@@ -7,7 +7,7 @@ export class webviewPanel {
    */
   public static currentPanel: webviewPanel | undefined;
 
-  public static readonly viewType = "Wenview";
+  public static readonly viewType = "Webview";
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
@@ -28,7 +28,7 @@ export class webviewPanel {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
       webviewPanel.viewType,
-      "VSinder",
+      "Sample Webview",
       column || vscode.ViewColumn.One,
       {
         // Enable javascript in the webview
@@ -113,22 +113,14 @@ export class webviewPanel {
 
     // Local path to css styles
     const styleResetPath = vscode.Uri.joinPath(
-      this._extensionUri,
-      "media",
-      "reset.css"
-    );
+      this._extensionUri, "media", "reset.css");
+    
     const stylesPathMainPath = vscode.Uri.joinPath(
-      this._extensionUri,
-      "media",
-      "vscode.css"
-    );
+      this._extensionUri,"media","vscode.css");
 
     // Uri to load styles into webview
     const stylesResetUri = webview.asWebviewUri(styleResetPath);
     const stylesMainUri = webview.asWebviewUri(stylesPathMainPath);
-    const cssUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
-    );
 
     // Use a nonce to only allow specific scripts to be run
     const nonce = getNonce();
@@ -151,7 +143,8 @@ export class webviewPanel {
         </script>
 			</head>
       <body>
-        <h1>Hello</h1>
+        <h1>Hello World</h1>
+        <button>Cool Button</button>
 			</body>
 			</html>`;
   }
