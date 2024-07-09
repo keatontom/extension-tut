@@ -1,21 +1,19 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as process from 'process';
-import { exec }  from 'child_process';
+import * as path from 'path';
+import { exec } from 'child_process';
+import { webviewPanel } from './webviewPanel';
 
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	//Pop-up Message
+	// Register the Hello World command
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.helloWorld', () => {
-			vscode.window.showInformationMessage('Hello World from extension-tut!');
-		}));
-	
-	//Pop-up Message with user input 
+			// vscode.window.showInformationMessage('Hello World from extension-tut!');
+			webviewPanel.createOrShow(context.extensionUri);
+		})
+	);
+
+	// Register the Ask Question command
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.askQuestion', async () => {
 			const answer = await vscode.window.showInformationMessage('How is your day?', 'Good', 'Bad');
@@ -25,18 +23,20 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showInformationMessage("That is great to hear!");
 			}
 			console.log({ answer });
-		}));
-	
-	//Terminal Commands
+		})
+	);
+
+	// Register the Touch command
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.touch', async () => {
 			const fileName = await vscode.window.showInputBox({
-				placeHolder: 'filename', prompt: "Please provide the file name",
+				placeHolder: 'filename',
+				prompt: "Please provide the file name",
 			});
 			const command = `touch ${fileName}`;
 			exec(command, { cwd: 'extension-tut' }, (error, stderr, stdout) => {
 				if (error) {
-					vscode.window.showErrorMessage(`Error running pyang: ${error.message}`);
+					vscode.window.showErrorMessage(`Error: ${error.message}`);
 					return;
 				}
 				if (stderr) {
@@ -47,21 +47,25 @@ export function activate(context: vscode.ExtensionContext) {
 					vscode.window.showInformationMessage(`Output: ${stdout}`);
 					return;
 				}
-			}
-			);
-		}));
+			});
+		})
+	);
+
+	// Register the Echo command
 	context.subscriptions.push(
 		vscode.commands.registerCommand('extension-tut.echo', async () => {
 			const fileName = await vscode.window.showInputBox({
-				placeHolder: 'file name', prompt: 'Please proved the file name'
+				placeHolder: 'file name',
+				prompt: 'Please provide the file name'
 			});
 			const message = await vscode.window.showInputBox({
-				placeHolder: 'message', prompt: "Please provide the message",
+				placeHolder: 'message',
+				prompt: "Please provide the message",
 			});
 			const command = `echo ${message} > ${fileName}`;
 			exec(command, { cwd: 'extension-tut' }, (error, stderr, stdout) => {
 				if (error) {
-					vscode.window.showErrorMessage(`Error running pyang: ${error.message}`);
+					vscode.window.showErrorMessage(`Error: ${error.message}`);
 					return;
 				}
 				if (stderr) {
@@ -72,10 +76,16 @@ export function activate(context: vscode.ExtensionContext) {
 					vscode.window.showInformationMessage(`Output: ${stdout}`);
 					return;
 				}
-			}
-			);
-		}));	
+			});
+		})
+	);
+	
+	//Webview
+	context.subscriptions.push(
+		vscode.commands.registerCommand('extension-tut.showWebview', () => {
+			webviewPanel.createOrShow(context.extensionUri);
+		})
+	);
 }
 
-// This method is called when your extension is deactivated
 export function deactivate() {}

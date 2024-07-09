@@ -12,6 +12,24 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "extension-tut-sidebar",
+          "title": "Sidebar",
+          "icon": "media/queens.png"
+        }
+      ]
+    },
+    "views": {
+      "extension-tut-sidebar": [
+        {
+          "type": "webview",
+          "id": "extension-tut-sidebar-view",
+          "name": "Sidebar View"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "extension-tut.helloWorld",
@@ -28,6 +46,10 @@
       {
         "command": "extension-tut.echo",
         "title": "Write to File"
+      },
+      {
+        "command": "extension-tut.showWebview",
+        "title": "Show Webview"
       }
     ],
     "languages": [
