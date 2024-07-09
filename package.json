@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:markdown"
+    "onLanguage:markdown",
+    "onCommand:extension-tut.createProjectTemplate"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -52,6 +53,10 @@
       {
         "command": "extension-tut.showWebview",
         "title": "Show Webview"
+      },
+      {
+        "command": "extension-tut.createProjectTemplate",
+        "title": "Create Template"
       }
     ],
     "languages": [

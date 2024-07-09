@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import * as process from 'process';
 import { exec }  from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
 import { subscribeToDocumentChanges, EMOJI_MENTION } from './diagnostics';
 const COMMAND = 'code-actions-sample.command';
 import { webviewPanel } from './webviewPanel';
@@ -102,6 +104,60 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand(COMMAND, () => vscode.env.openExternal(vscode.Uri.parse('https://unicode.org/emoji/charts-12.0/full-emoji-list.html')))
 	);	
+
+	let disposable = vscode.commands.registerCommand('extension-tut.createProjectTemplate', () => {
+        // 获取工作区根目录
+        const rootPath = vscode.workspace.rootPath;
+        if (!rootPath) {
+            vscode.window.showErrorMessage('Please open a workspace folder first.');
+            return;
+        }
+
+        // 创建项目骨架目录和文件
+        const projectPath = path.join(rootPath, 'Type1EntityProject');
+        if (!fs.existsSync(projectPath)) {
+            fs.mkdirSync(projectPath);
+        }
+
+        // 创建 YANG 模板文件
+        const yangTemplate = `
+module example-module {
+    namespace "http://example.com/ns/example-module";
+    prefix em;
+
+    organization "Example Inc.";
+    contact "example@example.com";
+
+    description "Example YANG module.";
+
+    revision 2020-01-01 {
+        description "Initial revision.";
+    }
+
+    container example-container {
+        leaf example-leaf {
+            type string;
+            description "An example leaf.";
+        }
+    }
+}
+        `;
+        fs.writeFileSync(path.join(projectPath, 'example.yang'), yangTemplate);
+
+        // 创建 XML 模板文件
+        const xmlTemplate = `
+<example-module xmlns="http://example.com/ns/example-module">
+    <example-container>
+        <example-leaf>example-value</example-leaf>
+    </example-container>
+</example-module>
+        `;
+        fs.writeFileSync(path.join(projectPath, 'example.xml'), xmlTemplate);
+
+        vscode.window.showInformationMessage('Project template created successfully.');
+    });
+
+    context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
