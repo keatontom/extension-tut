@@ -1,12 +1,23 @@
 import * as vscode from 'vscode';
-import * as process from 'process';
 import { exec }  from 'child_process';
 import { subscribeToDocumentChanges, EMOJI_MENTION } from './diagnostics';
 const COMMAND = 'code-actions-sample.command';
 import { webviewPanel } from './webviewPanel';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
+
+//Extending other extensions
+const extension = vscode.extensions.getExtension('publisher.extension-id');
+if (extension) {
+	const api = extension.exports;
+	// Use the API provided by the other extension 
+}
+
+
 export function activate(context: vscode.ExtensionContext) {
+
+	//Command from other extension
+	vscode.commands.executeCommand('extension.otherExtensionCommand');
 
 	// Register the Hello World command
 	context.subscriptions.push(
@@ -88,7 +99,8 @@ export function activate(context: vscode.ExtensionContext) {
 			webviewPanel.createOrShow(context.extensionUri);
 		})
 	);
-	
+
+
 	context.subscriptions.push(
 		vscode.languages.registerCodeActionsProvider('queens', new Emojizer(), {
 			providedCodeActionKinds: Emojizer.providedCodeActionKinds
